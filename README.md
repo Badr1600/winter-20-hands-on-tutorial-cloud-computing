@@ -44,18 +44,8 @@ $ sudo apt-get upgrade
 *) Use information from the user's account to display on the profile page
 
 #### Project Structure
->
-- project 
----- templates
--------- base.html <!-- contains common layout and links -->
--------- index.html <!-- show the home page -->
--------- login.html <!-- show the login form -->
--------- profile.html <!-- show the profile page -->
--------- signup.html <!-- show the signup form -->
----- __init__.py <!-- setup our app -->
----- auth.py <!-- the auth routes for our app -->
----- main.py <!-- the non-auth routes for our app -->
----- models.py <!-- our user model -->
+
+![tutorial-3](https://user-images.githubusercontent.com/9883712/71840313-12aaeb00-308b-11ea-95fb-145b3434e75c.PNG)
 
 > Step 3:
 Install python3.7
@@ -67,10 +57,10 @@ $ sudo apt install python3.7
 $ sudo apt install python3-pip
 ```
 
-> Step 4:
-Install Flask
-Flask-Login - to handle the user sessions after authentication
-Flask-SQLAlchemy - to represent the user model and interface with our database
+> Step 4: Install 
+1) Flask
+2) Flask-Login - to handle the user sessions after authentication
+3) Flask-SQLAlchemy - to represent the user model and interface with our database
 
 ```sh
 $ pip install flask flask-sqlalchemy flask-login
