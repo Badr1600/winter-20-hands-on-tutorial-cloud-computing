@@ -44,6 +44,7 @@ $ sudo apt-get upgrade
 *) Use information from the user's account to display on the profile page
 
 #### Project Structure
+>
 - project 
 ---- templates
 -------- base.html <!-- contains common layout and links -->
