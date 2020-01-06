@@ -16,10 +16,10 @@ For this section we are going to utilize the General Purpose instances as they p
 
 # Setup Steps
 
->Step 1
+>Step 1:
 Set up the VM instance using EC2 dashboard. Follow this link: https://aws.amazon.com/getting-started/tutorials/launch-windows-vm/ for detailed configuations
 
->Step 2
+>Step 2:
 Connect to your instance using the generated private key any prefered SSH client. In this tutorial we will be using PuTTY client (https://www.putty.org/)
 
 >Now you are connected to the virtual machince.
@@ -29,4 +29,48 @@ Connect to your instance using the generated private key any prefered SSH client
 ```sh
 $ sudo apt-get update
 $ sudo apt-get upgrade
+```
+
+#### We're going to build some sign up and login pages that allows our app to allow users to login and access pages. We'll grab information from the user model and display it on our pages when the user logs in to simulate what a profile would look like.
+
+#### We will cover the following in this tutorial:
+
+*) Use Python Environment for developing and hosting the web application.
+*) Use the Flask-Login library for session management
+*) Use the built-in Flask utility for hashing passwords
+*) Use Flask-SQLAlchemy to create a user model
+*) Create sign up and login forms for our users to create accounts and login
+*) Flash error messages back to users when something goes wrong
+*) Use information from the user's account to display on the profile page
+
+#### Project Structure
+- project 
+---- templates
+-------- base.html <!-- contains common layout and links -->
+-------- index.html <!-- show the home page -->
+-------- login.html <!-- show the login form -->
+-------- profile.html <!-- show the profile page -->
+-------- signup.html <!-- show the signup form -->
+---- __init__.py <!-- setup our app -->
+---- auth.py <!-- the auth routes for our app -->
+---- main.py <!-- the non-auth routes for our app -->
+---- models.py <!-- our user model -->
+
+> Step 3:
+Install python3.7
+
+```sh
+$ sudo apt install software-properties-common
+$ sudo add-apt-repository ppa:deadsnakes/ppa
+$ sudo apt install python3.7
+$ sudo apt install python3-pip
+```
+
+> Step 4:
+Install Flask
+Flask-Login - to handle the user sessions after authentication
+Flask-SQLAlchemy - to represent the user model and interface with our database
+
+```sh
+$ pip install flask flask-sqlalchemy flask-login
 ```
