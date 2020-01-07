@@ -34,34 +34,49 @@ $ sudo apt-get upgrade
 #### We're going to build some sign up and login pages that allows our app to allow users to login and access pages. We'll grab information from the user model and display it on our pages when the user logs in to simulate what a profile would look like.
 
 #### We will cover the following in this tutorial:
+1. Install LEMP Stack
+A LAMP (Linux, Nginx, MySQL, PHP) stack is a common, free, and open-source web stack used for hosting web content in a Linux environment.
 
-*) Use Python Environment for developing and hosting the web application.
-*) Use the Flask-Login library for session management
-*) Use the built-in Flask utility for hashing passwords
-*) Use Flask-SQLAlchemy to create a user model
-*) Create sign up and login forms for our users to create accounts and login
-*) Flash error messages back to users when something goes wrong
-*) Use information from the user's account to display on the profile page
+2. Add Inbound rule for HTTP requests on port 80 from the EC2 dashboard.
 
-#### Project Structure
-
-![tutorial-3](https://user-images.githubusercontent.com/9883712/71840313-12aaeb00-308b-11ea-95fb-145b3434e75c.PNG)
-
-> Step 3:
-Install python3.7
-
+3. Steps to Deploy Laravel App on AWS
 ```sh
-$ sudo apt install software-properties-common
-$ sudo add-apt-repository ppa:deadsnakes/ppa
-$ sudo apt install python3.7
-$ sudo apt install python3-pip
+$ sudo su (get superuser permissions)
+$ nginx=stable
+$ add-apt-repository ppa:nginx/$nginx
+$ apt-get update
+$ apt-get install nginx
+$ nginx -v
+$ add-apt-repository ppa:ondrej/php
+$ apt-get update
+$ apt-get install php7.2 php7.2-mysql php7.2-fpm php7.2-xml php7.2-gd php7.2-opcache php7.2-mbstring
+$ apt install zip unzip php7.2-zip
+$ php -V
+
+$ curl -sS https://getcomposer.org/installer | php
+$ mv composer.phar /usr/local/bin/composer
+
+$ cd /var/www
+```
+Install Laravel App
+```sh
+$ composer create-project --prefer-dist laravel/laravel test
 ```
 
-> Step 4: Install 
-1) Flask
-2) Flask-Login - to handle the user sessions after authentication
-3) Flask-SQLAlchemy - to represent the user model and interface with our database
+To Fix swap/memory issue (source: https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-18-04/)
+(source: https://laracasts.com/discuss/channels/forge/forge-composer-update-memory-allocation)
+```sh
+$ sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+$ sudo /sbin/mkswap /var/swap.1
+$ sudo /sbin/swapon /var/swap.1
+```
 
 ```sh
-$ pip install flask flask-sqlalchemy flask-login
+$ chown -R www-data:www-data test/
+$ chmod -R 775 test/
+$ cd /etc/nginx/sites/available
 ```
+
+
+4. Follow this tutorial (link: https://www.tutsmake.com/laravel-6-login-with-github-tutorial-example/) for creating first login/singup web applicaton
+
