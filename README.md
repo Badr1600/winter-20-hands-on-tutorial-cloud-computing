@@ -42,25 +42,39 @@ A LAMP (Linux, Nginx, MySQL, PHP) stack is a common, free, and open-source web s
 3. Steps to Deploy Laravel App on AWS
 ```sh
 $ sudo su (get superuser permissions)
-$ nginx=stable
-$ add-apt-repository ppa:nginx/$nginx
-$ apt-get update
-$ apt-get install nginx
-$ nginx -v
-$ add-apt-repository ppa:ondrej/php
+$ nginx=stable (establish a variable for Nginx's latest version)
+$ add-apt-repository ppa:nginx/$nginx (add the repository using the previous variable.)
+$ apt-get update (update our libraries again with the latest Nginx version.)
+$ apt-get install nginx (install Nginx.)
+$ nginx -v (Check the Nginx version)
+$ add-apt-repository ppa:ondrej/php (Install PHP 7.2 and php7.2-fpm)
 $ apt-get update
 $ apt-get install php7.2 php7.2-mysql php7.2-fpm php7.2-xml php7.2-gd php7.2-opcache php7.2-mbstring
 $ apt install zip unzip php7.2-zip
 $ php -V
-
-$ curl -sS https://getcomposer.org/installer | php
-$ mv composer.phar /usr/local/bin/composer
-
-$ cd /var/www
+$ curl -sS https://getcomposer.org/installer | php  (Download Composer:)
+$ mv composer.phar /usr/local/bin/composer (Move Composer to make it executable.)
+$ cd /var/www ( move to the directory where we want to install/move our Laravel instance.)
 ```
+
+Install MariaDB
+```sh
+$ sudo apt install mariadb-server
+$ sudo systemctl status mariadb
+$ sudo mysql_secure_installation
+$ mysql -u root -p
+$ mysql> CREATE DATABASE laravel;
+$ mysql> CREATE USER 'user'@'localhost' IDENTIFIED BY 'password'; (create new user)
+$ mysql> GRANT ALL PRIVILEGES ON laravel.* TO 'user'@'localhost';
+$ mysql> GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
+$ mysql> FLUSH PRIVILEGES;
+```
+
 Install Laravel App
 ```sh
 $ composer create-project --prefer-dist laravel/laravel test
+$ chown -R www-data:www-data test/
+$ chmod -R 775 test/
 ```
 
 To Fix swap/memory issue (source: https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-18-04/)
@@ -70,13 +84,6 @@ $ sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
 $ sudo /sbin/mkswap /var/swap.1
 $ sudo /sbin/swapon /var/swap.1
 ```
-
-```sh
-$ chown -R www-data:www-data test/
-$ chmod -R 775 test/
-$ cd /etc/nginx/sites/available
-```
-
 
 4. Follow this tutorial (link: https://www.tutsmake.com/laravel-6-login-with-github-tutorial-example/) for creating first login/singup web applicaton
 
