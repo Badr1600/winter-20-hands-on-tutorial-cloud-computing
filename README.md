@@ -51,7 +51,7 @@ $ add-apt-repository ppa:ondrej/php (Install PHP 7.2 and php7.2-fpm)
 $ apt-get update
 $ apt-get install php7.2 php7.2-mysql php7.2-fpm php7.2-xml php7.2-gd php7.2-opcache php7.2-mbstring
 $ apt install zip unzip php7.2-zip
-$ php -V
+$ php -v
 $ curl -sS https://getcomposer.org/installer | php  (Download Composer:)
 $ mv composer.phar /usr/local/bin/composer (Move Composer to make it executable.)
 $ cd /var/www ( move to the directory where we want to install/move our Laravel instance.)
